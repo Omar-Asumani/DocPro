@@ -59,15 +59,5 @@ namespace DocPro.Persistence.Repos
         {
             return db.Documents.Any(c => c.Name == newDocument.Name);
         }
-
-        //public static void SetLogisticCenter(Document logisticCenter)
-        //{
-        //    DocProEntities db = new DocProEntities();
-
-        //    logisticCenter.IsLogisticCenter = true;
-        //    var Document = db.Documents.First(c => c.Id == logisticCenter.Id);
-        //    Document.IsLogisticCenter = logisticCenter.IsLogisticCenter;
-        //    db.SaveChanges();
-        //}
     }
 }
