@@ -13,5 +13,32 @@ namespace DocPro.Pages
 
     public partial class Build
     {
+
+        /// <summary>
+        /// TemplatesLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TemplatesLabel;
+
+        /// <summary>
+        /// TemplatesDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TemplatesDropDownList;
+
+        /// <summary>
+        /// TemplateInputsPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel TemplateInputsPanel;
     }
 }
