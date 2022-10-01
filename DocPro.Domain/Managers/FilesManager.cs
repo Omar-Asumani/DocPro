@@ -51,7 +51,7 @@ namespace DocPro.Domain.Managers
 
         public static Document Generate(string name)
         {
-            return DocumentsRepository.GetDocuments().LastOrDefault(d => d.Name.Contains(name));
+            return DocumentsRepository.GetDocuments().LastOrDefault(d => d.Name.Equals(name));
         }
 
         public static Dictionary<int, string> Generate(int documentID)
@@ -65,7 +65,7 @@ namespace DocPro.Domain.Managers
                 {
                     using(DocX document = DocX.Load(ms))
                     {
-                        string placeholderPattern = @"<<<(?<ID>\d)-(?<Caption>[\w\d ]+)>>>";
+                        string placeholderPattern = @"<<<(?<ID>\d)-(?<Caption>[\w\d_]+)>>>";
                         Regex placeholderRegex = new Regex(placeholderPattern);
                         foreach(var paragraph in document.Sections.SelectMany(s => s.SectionParagraphs))
                         {
@@ -92,6 +92,41 @@ namespace DocPro.Domain.Managers
 
             return placeholders;
         }
+
+        public static byte[] GetProcessed(int documentID, Dictionary<string, string> replaceValues)
+        {
+            var document = GetAll().First(d => d.DocumentID == documentID);
+            try
+            {
+                // Load the document.
+                using(MemoryStream ms = new MemoryStream())
+                {
+                    ms.Write(document.Binary, 0, document.Binary.Length);
+                    ms.Position = 0;
+                    using(DocX docXProcessor = DocX.Load(ms))
+                    {
+                        foreach(var replace in replaceValues)
+                        {
+                            // Replace text in this document.
+                            docXProcessor.ReplaceText(replace.Key, replace.Value); 
+                        } // foreach
+
+                        // Save changes made to this document.
+                        docXProcessor.SaveAs(ms);
+
+                        using(var reader = new BinaryReader(ms))
+                        {
+                            ms.Position = 0;
+                            return reader.ReadBytes((int)ms.Length);
+                        } // using
+                    } // using
+                } // using
+            } // try
+            catch(Exception ex)
+            {
+                throw new CustomException("Problem reading the file.");
+            } // try-catch
+        } // GetProcessed
 
         //public static void Parse(Stream fileContent, string fileName, string path)
         //{

@@ -8,4 +8,5 @@
     </asp:DropDownList>
     <asp:panel ID="TemplateInputsPanel" runat="server" style="margin-top:30px" Width="481">
     </asp:panel>
+    <asp:Button ID="GenerateBtn" runat="server" Text="Generate" OnClick="GenerateBtn_Click" CssClass="btn top-margin" />
 </asp:Content>

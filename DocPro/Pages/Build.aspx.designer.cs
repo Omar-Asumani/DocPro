@@ -40,5 +40,14 @@ namespace DocPro.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel TemplateInputsPanel;
+
+        /// <summary>
+        /// GenerateBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerateBtn;
     }
 }
