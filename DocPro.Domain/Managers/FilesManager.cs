@@ -65,7 +65,7 @@ namespace DocPro.Domain.Managers
                 {
                     using(DocX document = DocX.Load(ms))
                     {
-                        string placeholderPattern = @"<<<(?<ID>\d)-(?<Caption>[\w\d_]+)>>>";
+                        string placeholderPattern = @"<<<(?<ID>\d)-(?<Caption>[\w\s\d_абвгдежзийклмнопрстуфхцчшщъьюя]+)>>>";
                         Regex placeholderRegex = new Regex(placeholderPattern);
                         foreach(var paragraph in document.Sections.SelectMany(s => s.SectionParagraphs))
                         {
@@ -93,7 +93,7 @@ namespace DocPro.Domain.Managers
             return placeholders;
         }
 
-        public static byte[] GetProcessed(int documentID, Dictionary<string, string> replaceValues)
+        public static Tuple<string, byte[]> GetProcessed(int documentID, Dictionary<string, string> replaceValues)
         {
             var document = GetAll().First(d => d.DocumentID == documentID);
             try
@@ -117,7 +117,8 @@ namespace DocPro.Domain.Managers
                         using(var reader = new BinaryReader(ms))
                         {
                             ms.Position = 0;
-                            return reader.ReadBytes((int)ms.Length);
+
+                            return Tuple.Create<string, byte[]>(document.Name, reader.ReadBytes((int)ms.Length));
                         } // using
                     } // using
                 } // using

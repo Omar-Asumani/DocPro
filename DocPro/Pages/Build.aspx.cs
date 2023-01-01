@@ -92,10 +92,12 @@ namespace DocPro.Pages
             } // if
         } // GenerateBtn_Click
 
-        private void DownloadToBrowser(byte[] binary)
+        private void DownloadToBrowser(Tuple<string, byte[]> file)
         {
+            string fileName = file.Item1;
+            byte[] binary = file.Item2;
             Response.ContentType = DOCX_MIME_TYPE;
-            Response.AppendHeader("Content-Disposition", String.Format("attachment; filename=DocPro - {0}-utc.docx", DateTime.UtcNow.ToString()));
+            Response.AppendHeader("Content-Disposition", String.Format("attachment; filename={0}", fileName));
 
             Response.BufferOutput = false;
 
