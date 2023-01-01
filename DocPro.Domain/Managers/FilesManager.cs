@@ -22,7 +22,7 @@ namespace DocPro.Domain.Managers
                     using(DocX document = DocX.Load(fileContent))
                     {
                         // Replace text in this document.
-                        document.ReplaceText("<<<задание>>>", "WTF");
+                        //document.ReplaceText("<<<задание>>>", "test");
                         // Save changes made to this document.
                         document.SaveAs(ms);
                         using(var reader = new BinaryReader(ms))
@@ -40,7 +40,7 @@ namespace DocPro.Domain.Managers
             } // try
             catch(System.Exception ex)
             {
-                throw new CustomException("Problem reading the file.");
+                throw;
             } // try-catch
         }
 
@@ -87,7 +87,7 @@ namespace DocPro.Domain.Managers
             }
             catch(Exception)
             {
-                throw new CustomException("Problem reading the file.");
+                throw;
             } // try-catch
 
             return placeholders;
@@ -108,7 +108,7 @@ namespace DocPro.Domain.Managers
                         foreach(var replace in replaceValues)
                         {
                             // Replace text in this document.
-                            docXProcessor.ReplaceText(replace.Key, replace.Value); 
+                            docXProcessor.ReplaceText(replace.Key, replace.Value);
                         } // foreach
 
                         // Save changes made to this document.
@@ -124,40 +124,8 @@ namespace DocPro.Domain.Managers
             } // try
             catch(Exception ex)
             {
-                throw new CustomException("Problem reading the file.");
+                throw;
             } // try-catch
         } // GetProcessed
-
-        //public static void Parse(Stream fileContent, string fileName, string path)
-        //{
-        //    try
-        //    {
-        //        // Load the document.
-        //        using(MemoryStream ms = new MemoryStream())
-        //        {
-        //            using(DocX document = DocX.Load(fileContent))
-        //            {
-        //                // Replace text in this document.
-        //                document.ReplaceText("<<<задание>>>", "WTF");
-        //                // Save changes made to this document.
-        //                document.SaveAs(ms);
-        //                using(var reader = new BinaryReader(ms))
-        //                {
-        //                    ms.Position = 0;
-        //                    DocumentsRepository.AddDocument(new Persistence.Document
-        //                    {
-        //                        Binary = reader.ReadBytes((int)ms.Length),
-        //                        Name = fileName,
-        //                        DateCreated = System.DateTime.UtcNow
-        //                    });
-        //                } // using
-        //            } // using
-        //        } // using
-        //    } // try
-        //    catch(System.Exception ex)
-        //    {
-        //        throw new CustomException("Problem reading the file.");
-        //    } // try-catch
-        //} // Parse
     }
 }

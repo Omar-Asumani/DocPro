@@ -36,12 +36,12 @@ namespace DocPro.Pages
                 System.IO.Stream fileStream = FileUpload1.FileContent;
                 //string path = Server.MapPath(@"~/Задание_за_изработка - Copy.docx");
                 //FilesManager.Parse(fileStream, "DocPro", path);
-                FilesManager.Parse(fileStream, "DocPro");
+                FilesManager.Parse(fileStream, FileUpload1.FileName);
                 //DownloadToBrowser(FilesManager.Generate("DocPro").Binary);
             }
             catch(Exception ex)
             {
-                ErrorLabel.Text = ex.Message;
+                ErrorLabel.Text = ex.ToString();
             }
         }
 

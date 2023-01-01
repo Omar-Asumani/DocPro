@@ -1,6 +1,8 @@
 ﻿using DocPro.Domain.Managers;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace DocPro.Pages
@@ -117,7 +119,7 @@ namespace DocPro.Pages
 
                     && !ctrls[i].Contains("EVENTTARGET"))
                 {
-                    string textBoxValue = ctrls[i].Split('=')[1];
+                    string textBoxValue = HttpUtility.UrlDecode(ctrls[i].Split('=')[1], Encoding.UTF8);
 
                     return textBoxValue;
                 }
