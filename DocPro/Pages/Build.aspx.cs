@@ -1,12 +1,12 @@
-﻿using DocPro.Domain.Managers;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Web;
-using System.Web.UI.WebControls;
-
-namespace DocPro.Pages
+﻿namespace DocPro.Pages
 {
+    using DocPro.Domain.Managers;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Web;
+    using System.Web.UI.WebControls;
+
     public partial class Build : System.Web.UI.Page
     {
         private const string DOCX_MIME_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -15,12 +15,12 @@ namespace DocPro.Pages
         {
             // Do page initializations
             TemplatesLabel.Text = "Document";
-        }
+        } // Initialize
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Initialize();
-        }
+        } // Page_Load
 
         protected void TemplatesDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -67,7 +67,7 @@ namespace DocPro.Pages
             templates.AddRange(FilesManager.GetAll());
 
             return templates;
-        }
+        } // PopulateTemplatesDropDownList
 
         protected void GenerateBtn_Click(object sender, EventArgs e)
         {
@@ -109,7 +109,7 @@ namespace DocPro.Pages
 
             Response.Flush();
             Response.End();
-        }
+        } // DownloadToBrowser
 
         private string GetTextBoxValue(string textBoxID)
         {
@@ -124,10 +124,10 @@ namespace DocPro.Pages
                     string textBoxValue = HttpUtility.UrlDecode(ctrls[i].Split('=')[1], Encoding.UTF8);
 
                     return textBoxValue;
-                }
-            }
+                } // if
+            } // for
 
             return string.Empty;
-        } // RecreateControls
-    }
-}
+        } // GetTextBoxValue
+    } // class Build
+} // namespace
