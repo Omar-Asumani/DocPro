@@ -65,7 +65,7 @@ namespace DocPro.Domain.Managers
                 {
                     using(DocX document = DocX.Load(ms))
                     {
-                        string placeholderPattern = @"<<<(?<ID>\d)-(?<Caption>[\w\s\d_абвгдежзийклмнопрстуфхцчшщъьюя]+)>>>";
+                        string placeholderPattern = @"<<<(?<ID>\d+)-(?<Caption>[\w\s\d_абвгдежзийклмнопрстуфхцчшщъьюя]+)>>>";
                         Regex placeholderRegex = new Regex(placeholderPattern);
                         foreach(var paragraph in document.Sections.SelectMany(s => s.SectionParagraphs))
                         {
